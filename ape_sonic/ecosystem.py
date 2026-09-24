@@ -4,11 +4,11 @@ from typing import ClassVar, cast
 from ape.types import HexBytes, HexInt
 from ape_ethereum.ecosystem import (
     BaseEthereumConfig,
+    Block as EthereumBlock,
     Ethereum,
     NetworkConfig,
     create_network_config,
 )
-from ape_ethereum.ecosystem import Block as EthereumBlock
 from pydantic import Field, model_validator
 
 NETWORKS = {
