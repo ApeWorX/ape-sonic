@@ -30,7 +30,7 @@ class Block(EthereumBlock):
     timestamp_nano: HexInt = Field(alias="timestampNano")
 
     @model_validator(mode="before")
-    def validate_nano_timestamp(self, values: dict):
+    def validate_nano_timestamp(cls, values: dict):
         if not values.get("timestamp_nano"):
             # NOTE: For instances like using it with anvil or hardhat, which doesn't have this field
             values["timestamp_nano"] = values["timestamp"] * int(1e9)
