@@ -2,9 +2,13 @@ from datetime import datetime
 from typing import ClassVar, cast
 
 from ape.types import HexBytes, HexInt
-from ape_ethereum.ecosystem import BaseEthereumConfig
-from ape_ethereum.ecosystem import Block as EthereumBlock
-from ape_ethereum.ecosystem import Ethereum, NetworkConfig, create_network_config
+from ape_ethereum.ecosystem import (
+    BaseEthereumConfig,
+    Block as EthereumBlock,
+    Ethereum,
+    NetworkConfig,
+    create_network_config,
+)
 from pydantic import Field, model_validator
 
 NETWORKS = {
@@ -26,6 +30,7 @@ class Block(EthereumBlock):
     timestamp_nano: HexInt = Field(alias="timestampNano")
 
     @model_validator(mode="before")
+    @classmethod
     def validate_nano_timestamp(cls, values: dict):
         if not values.get("timestamp_nano"):
             # NOTE: For instances like using it with anvil or hardhat, which doesn't have this field
@@ -43,7 +48,7 @@ class Sonic(Ethereum):
 
     @property
     def config(self) -> SonicConfig:  # type: ignore[override]
-        return cast(SonicConfig, self.config_manager.get_config("sonic"))
+        return cast("SonicConfig", self.config_manager.get_config("sonic"))
 
     def decode_block(self, data: dict) -> Block:
         # NOTE: Copied from `ape_ethereum.Ethereum.decode_block`

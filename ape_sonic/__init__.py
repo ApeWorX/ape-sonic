@@ -54,18 +54,17 @@ def __getattr__(name: str):
 
         return NETWORKS
 
-    elif name == "Sonic":
+    if name == "Sonic":
         from .ecosystem import Sonic
 
         return Sonic
 
-    elif name == "SonicConfig":
+    if name == "SonicConfig":
         from .ecosystem import SonicConfig
 
         return SonicConfig
 
-    else:
-        raise AttributeError(name)
+    raise AttributeError(name)
 
 
 __all__ = [
