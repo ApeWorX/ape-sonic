@@ -50,3 +50,4 @@ Installing this plugin adds support for the Sonic ecosystem:
 ```bash
 ape console --network sonic:mainnet
 ```
+
